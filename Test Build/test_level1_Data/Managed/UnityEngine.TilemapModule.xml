@@ -530,12 +530,20 @@ Only one class at any one time should set defaultBrush to true.</para>
     </member>
     <member name="P:UnityEngine.Tilemaps.Tilemap.layoutGrid">
       <summary>
+<<<<<<< HEAD
         <para>Gets the associated with this tile map.</para>
+=======
+        <para>Gets the Grid associated with this tile map.</para>
+>>>>>>> 6e3e823ff0b627122fcd5433a71a5523a7a44276
       </summary>
     </member>
     <member name="P:UnityEngine.Tilemaps.Tilemap.layoutGrid">
       <summary>
+<<<<<<< HEAD
         <para>Gets the associated with this tile map.</para>
+=======
+        <para>Gets the Grid associated with this tile map.</para>
+>>>>>>> 6e3e823ff0b627122fcd5433a71a5523a7a44276
       </summary>
     </member>
     <member name="P:UnityEngine.Tilemaps.Tilemap.localBounds">
@@ -672,7 +680,11 @@ Only one class at any one time should set defaultBrush to true.</para>
       </summary>
       <param name="position">Position of the Tile on the Tilemap.</param>
       <returns>
+<<<<<<< HEAD
         <para> placed at the cell.</para>
+=======
+        <para>Tilemaps.TileBase placed at the cell.</para>
+>>>>>>> 6e3e823ff0b627122fcd5433a71a5523a7a44276
       </returns>
     </member>
     <member name="M:UnityEngine.Tilemaps.Tilemap.GetTile(UnityEngine.Vector3Int)">
@@ -851,7 +863,11 @@ Only one class at any one time should set defaultBrush to true.</para>
     </member>
     <member name="M:UnityEngine.Tilemaps.Tilemap.SwapTile(UnityEngine.Tilemaps.TileBase,UnityEngine.Tilemaps.TileBase)">
       <summary>
+<<<<<<< HEAD
         <para>Swaps all existing tiles of and refreshes all the swapped tiles.</para>
+=======
+        <para>Swaps all existing tiles of changeTile to newTile and refreshes all the swapped tiles.</para>
+>>>>>>> 6e3e823ff0b627122fcd5433a71a5523a7a44276
       </summary>
       <param name="changeTile">Tile to swap.</param>
       <param name="newTile">Tile to swap to.</param>
