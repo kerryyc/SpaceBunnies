@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour {
@@ -14,6 +15,9 @@ public class ButtonScript : MonoBehaviour {
     }
 
     public void ReloadScene() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            Debug.Log("Clicked button");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
