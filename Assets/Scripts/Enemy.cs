@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public float health = 10f;
-    public GameObject player;
+    private GameObject player;
     public bool facingRight = false;
 
     private Rigidbody2D rb2d;
@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         thisColl = GetComponent<Collider2D>();
+        player = GameObject.FindGameObjectWithTag("Player");
         //flip enemy depending on face direction
         //no movement for now -> simple one time flip
         if (facingRight)
