@@ -162,11 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55a0db35ae3be94a85ff10b5793a775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  fallSpeed: 10
-  canMove: 1
   health: 10
+  speed: 5
   fireRate: 0.2
+  canMove: 1
   bulletPrefab: {fileID: 1600818947723470, guid: 433e6717111919d4fb7e16afe12c16ad,
     type: 2}
   jumpForce: 700
@@ -174,7 +173,8 @@ MonoBehaviour:
   groundRadius: {x: 0.7, y: 0.2}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
+  startBlinking: 0
 --- !u!212 &212502932505671692
 SpriteRenderer:
   m_ObjectHideFlags: 1
