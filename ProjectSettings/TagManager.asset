@@ -13,7 +13,7 @@ TagManager:
   - PlatformTrigger
   - PlayerHitbox
   - EnemyProjectile
-  - Wall
+  - EndPointDoor
   layers:
   - Default
   - TransparentFX
