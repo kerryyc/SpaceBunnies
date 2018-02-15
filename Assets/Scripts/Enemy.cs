@@ -179,7 +179,6 @@ public class Enemy : MonoBehaviour {
     private void AttackPlayerMelee() {
         //starts attack animation, but does not create a bullet
         if (canAttack) {
-            canMove = false;
             anim.Play("bunny_attack");
             canAttack = false;
             attackCoolDown = Time.time + attackRate;

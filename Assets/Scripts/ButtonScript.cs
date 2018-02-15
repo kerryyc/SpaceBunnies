@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour {
-    public int levelNum;
+    public int levelNum = 1;
     public string sceneName;
 
 	public void StartGame() {
