@@ -22,7 +22,8 @@ public class Projectile : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D coll) {
-        if(coll.gameObject.tag != "Background" && coll.gameObject.tag != "Projectile" && coll.gameObject.tag != "PlatformTrigger")
+        if(coll.gameObject.tag != "Background" && coll.gameObject.tag != "Projectile" && 
+            coll.gameObject.tag != "PlatformTrigger" && coll.gameObject.tag != "EnemyProjectile")
             DestroySelf();
     }
 
