@@ -55,6 +55,8 @@ public class Enemy : MonoBehaviour {
 
         if (facingLeft)
             Flip();
+        else
+            facingLeft = !facingLeft;
         toggleMove = canMove;
     }
 	
@@ -74,6 +76,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0) {
             //trigger death animation, disable physics, then destroy
             anim.Play("bunny_explosion");
+            anim.SetTrigger("Dead");
             thisColl.enabled = false;
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             Destroy(this.gameObject, 2);
