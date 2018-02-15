@@ -5,12 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public float health = 10f; //health of enemy
-    public float detectDistance = 5f; //detection of player distance
+    public float xDistance = 5f; //detection of x player distance
+    public float yDistance = 3f; //detection of y player distance
     public float attackRate = 3f; //how fast enemy can fire
+    public float speed = 4f; //movement speed
+
     public bool facingLeft = false; //which direction enemy is facing
     public bool attackPlayerWithBullet = true; //whether to attack with melee or bullet
     public GameObject bulletPrefab; //enemy bullet
 
+    public bool canMove = false; //whether enemy can move
+    private bool toggleMove;
+    public bool toggleAttackWhileMove = false;
+    public float offset = 0f; //offset of enemy when flipping sprite if applicable
+    
     //general components
     private Rigidbody2D rb2d;
     private Animator anim;
@@ -21,9 +29,6 @@ public class Enemy : MonoBehaviour {
     //other objects to be called
     private GameObject player;
     private GameObject bullet;
-
-    //platform information
-    private Vector3 platformSize;
 
     //values for timing attacks
     private bool canAttack = true;
@@ -43,18 +48,29 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         rb2d = GetComponent<Rigidbody2D>();
-        this.anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         thisColl = GetComponent<Collider2D>();
         spriteRend = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
-	}
-	
-    void Update() {
-        //flip enemy depending on face direction
-        //no movement for now -> simple one time flip
+
         if (facingLeft)
             Flip();
+        toggleMove = canMove;
+    }
+	
+    void FixedUpdate() {
+        //set movement
+        if (canMove) {
+            anim.SetBool("Move", true);
+            rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+        }
+        else {
+            anim.SetBool("Move", false);
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
+    }
 
+    void Update() {
         if (health <= 0) {
             //trigger death animation, disable physics, then destroy
             anim.SetTrigger("Dead");
@@ -68,10 +84,20 @@ public class Enemy : MonoBehaviour {
                 SpriteBlinkingEffect();
 
             //attack player with bullet or melee
-            if (attackPlayerWithBullet)
-                AttackPlayerBullet();
-            else
-                AttackPlayerMelee();
+            Vector3 detectDistance = transform.position - player.transform.position;
+            if (Mathf.Abs(detectDistance.x) <= xDistance && Mathf.Abs(detectDistance.y) <= yDistance) {
+                if ((detectDistance.x < 0 && !facingLeft) || (detectDistance.x > 0 && facingLeft))
+                    Flip();
+
+                if (attackPlayerWithBullet)
+                    AttackPlayerBullet();
+                else
+                    AttackPlayerMelee();
+            }
+            else {
+                canMove = toggleMove;
+            }
+
         }
     }
 	
@@ -82,14 +108,11 @@ public class Enemy : MonoBehaviour {
             spriteBlinkingTotalTimer = 0f;
             --health;
         }
+        else if (other.gameObject.tag == "PlatformTrigger")
+            Flip();
 	}
 
     void OnCollisionEnter2D (Collision2D coll) {
-        if (coll.gameObject.tag == "Platform") {
-            //when initially colliding with platform, get all information about the platform
-            platformSize = coll.gameObject.GetComponent<Renderer>().bounds.size;
-            Debug.Log(platformSize);
-        }
         if (coll.collider.GetType() == typeof(BoxCollider2D) && coll.gameObject.tag == "Player") {
             //if player collides, then player takes damage
             player.GetComponent<PlayerController>().health -= 1;
@@ -115,15 +138,26 @@ public class Enemy : MonoBehaviour {
 
     private void Flip() {
         //flip sprite depending on direction faced
-        facingLeft = !facingLeft;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        speed *= -1;
+
+        //change offset of enemy
+        if(facingLeft)
+            transform.position = new Vector2(transform.position.x - offset, transform.position.y);
+        else
+            transform.position = new Vector2(transform.position.x + offset, transform.position.y);
+        facingLeft = !facingLeft;
     }
 
     private void AttackPlayerBullet() {
         //starts attack animation and creates a bullet
-        if (canAttack && Vector2.Distance(transform.position, player.transform.position) <= detectDistance) {
+        if (canAttack) {
+            if (!toggleAttackWhileMove) {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                canMove = false;
+            }
             anim.Play("bunny_attack");
             canAttack = false;
             attackCoolDown = Time.time + attackRate;
@@ -136,7 +170,12 @@ public class Enemy : MonoBehaviour {
 
     private void AttackPlayerMelee() {
         //starts attack animation, but does not create a bullet
-        if (canAttack && Vector2.Distance(transform.position, player.transform.position) <= detectDistance) {
+        if (canAttack) {
+            if (!toggleAttackWhileMove) {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                canMove = false;
+            }
+            canMove = false;
             anim.Play("bunny_attack");
             canAttack = false;
             attackCoolDown = Time.time + attackRate;
