@@ -119,15 +119,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  detectDistance: 5
+  xDistance: 5
+  yDistance: 3
   attackRate: 3
   speed: 4
   facingLeft: 1
   attackPlayerWithBullet: 1
-  canMove: 0
-  offset: 0.56
   bulletPrefab: {fileID: 1742905810340772, guid: 8c47ea34ee63f144f8231a59b2352932,
     type: 2}
+  canMove: 0
+  toggleAttackWhileMove: 0
+  offset: 0.56
   startBlinking: 0
 --- !u!212 &212224571985789790
 SpriteRenderer:
@@ -180,7 +182,7 @@ PlatformEffector2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618976516794792}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
