@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 251436438037994166}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ PlatformEffector2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643055076275138}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295

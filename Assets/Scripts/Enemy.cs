@@ -77,7 +77,6 @@ public class Enemy : MonoBehaviour {
             //trigger death animation, disable physics, then destroy
             spriteRend.enabled = true;
             anim.Play("bunny_explosion");
-            ////anim.SetTrigger("Dead");
             thisColl.enabled = false;
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             Destroy(this.gameObject, 2);
@@ -87,18 +86,27 @@ public class Enemy : MonoBehaviour {
             if (startBlinking)
                 SpriteBlinkingEffect();
 
-            //attack player with bullet or melee
+            //attack player if within detect distance
             Vector3 detectDistance = transform.position - player.transform.position;
             if (Mathf.Abs(detectDistance.x) <= xDistance && Mathf.Abs(detectDistance.y) <= yDistance) {
+                //if not facing player, flip
                 if ((detectDistance.x < 0 && !facingLeft) || (detectDistance.x > 0 && facingLeft))
                     Flip();
 
+                //if can't attack while moving, disable movement
+                if (!toggleAttackWhileMove) {
+                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                    canMove = false;
+                }
+
+                //attack player with bullet or with melee depending on toggle
                 if (attackPlayerWithBullet)
                     AttackPlayerBullet();
                 else
                     AttackPlayerMelee();
             }
             else {
+                //allow movement if enabled
                 canMove = toggleMove;
             }
 
@@ -158,10 +166,6 @@ public class Enemy : MonoBehaviour {
     private void AttackPlayerBullet() {
         //starts attack animation and creates a bullet
         if (canAttack) {
-            if (!toggleAttackWhileMove) {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                canMove = false;
-            }
             anim.Play("bunny_attack");
             canAttack = false;
             attackCoolDown = Time.time + attackRate;
@@ -175,10 +179,6 @@ public class Enemy : MonoBehaviour {
     private void AttackPlayerMelee() {
         //starts attack animation, but does not create a bullet
         if (canAttack) {
-            if (!toggleAttackWhileMove) {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                canMove = false;
-            }
             canMove = false;
             anim.Play("bunny_attack");
             canAttack = false;

@@ -71,8 +71,21 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         //what happens when health is 0
-        if (health <= 0)
-            gameObject.SetActive(false);
+        if (health <= 0) {
+            anim.SetLayerWeight(1, 0); //set animation to ground layer to play death animation
+            spriteRend.enabled = true; //force enable sprite renderer if disabled by different method
+            anim.Play("player_death"); //play death animation
+            //disable all colliders
+            Collider2D[] colChildren = gameObject.GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D col in colChildren) {
+                col.enabled = false;
+            }
+            GetComponent<Collider2D>().enabled = false;
+            //disable physics so object is not affected by gravity
+            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            Invoke("PlayerDead", 1f); //disable player when animation is done playing
+        }
+            
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {
@@ -164,5 +177,9 @@ public class PlayerController : MonoBehaviour {
             anim.SetLayerWeight(1, 1);
         else
             anim.SetLayerWeight(1, 0);
+    }
+
+    private void PlayerDead() {
+        gameObject.SetActive(false);
     }
 }
