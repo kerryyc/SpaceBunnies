@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour {
     void Update() {
         if (health <= 0) {
             //trigger death animation, disable physics, then destroy
-            anim.SetTrigger("Dead");
+            anim.Play("bunny_explosion");
             thisColl.enabled = false;
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             Destroy(this.gameObject, 2);
