@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class EndLevel1 : MonoBehaviour {
     public int levelNum;
+    public bool isDoorOpen;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,11 +16,21 @@ public class EndLevel1 : MonoBehaviour {
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "PlayerHitbox" || collision.gameObject.tag == "Player")
         {
             Debug.Log("Collision with door");
             string levelName = "Level" + levelNum;
-            SceneManager.LoadScene(levelName);
+            // check if the door trigger has been triggered, this should only happen in levels 2 and onwards
+            Debug.Log(isDoorOpen);
+            if (isDoorOpen)
+            {
+                Debug.Log("Open Sesame");
+                SceneManager.LoadScene(levelName);
+            }
+
+           
         }
+
     }
 }
