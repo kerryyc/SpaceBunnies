@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour {
     public int levelNum;
+    public string sceneName;
+
 	public void StartGame() {
         string currLevel = "Level" + levelNum;
         SceneManager.LoadScene(currLevel, LoadSceneMode.Single);
@@ -21,5 +23,10 @@ public class ButtonScript : MonoBehaviour {
         if (EventSystem.current.IsPointerOverGameObject()) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    public void LoadScene() {
+        //loads a scene under scenename
+        SceneManager.LoadScene(sceneName);
     }
 }
