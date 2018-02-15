@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 
     //miscellaneous
     private GameObject bullet; //player bullet
-    private bool facingRight = true; //whether player is facing right
+    [HideInInspector] public bool facingRight = true; //whether player is facing right
 
     //variables for fire cooldown
     private bool canFire = true;

@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618976516794792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.692792, y: -1.74, z: -0.00399014}
+  m_LocalPosition: {x: 6.55, y: -4.64, z: -0.00399014}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61249251760989534
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -121,10 +121,14 @@ MonoBehaviour:
   health: 5
   detectDistance: 5
   attackRate: 3
+  speed: 4
   facingLeft: 1
   attackPlayerWithBullet: 1
+  canMove: 0
+  offset: 0.56
   bulletPrefab: {fileID: 1742905810340772, guid: 8c47ea34ee63f144f8231a59b2352932,
     type: 2}
+  startBlinking: 0
 --- !u!212 &212224571985789790
 SpriteRenderer:
   m_ObjectHideFlags: 1
