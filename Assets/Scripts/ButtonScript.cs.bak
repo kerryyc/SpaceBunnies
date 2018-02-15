@@ -7,8 +7,13 @@ using UnityEngine.SceneManagement;
 public class ButtonScript : MonoBehaviour {
     public int levelNum;
 	public void StartGame() {
+<<<<<<< Updated upstream
+        //loads scene into level1
+        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+=======
         string currLevel = "Level" + levelNum;
         SceneManager.LoadScene(currLevel, LoadSceneMode.Single);
+>>>>>>> Stashed changes
     }
 
     public void QuitGame() {

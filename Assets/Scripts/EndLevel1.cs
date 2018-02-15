@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class EndLevel1 : MonoBehaviour {
-
+    public int levelNum;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,7 +17,9 @@ public class EndLevel1 : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("MainMenu");
+            Debug.Log("Collision with door");
+            string levelName = "Level" + levelNum;
+            SceneManager.LoadScene(levelName);
         }
     }
 }
