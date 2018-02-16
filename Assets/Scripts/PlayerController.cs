@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         //what happens when health is 0
         if (health <= 0) {
+            //transform.parent = null;
             anim.SetLayerWeight(1, 0); //set animation to ground layer to play death animation
             spriteRend.enabled = true; //force enable sprite renderer if disabled by different method
             anim.Play("player_death"); //play death animation
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour {
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {
+            transform.parent = null; //if attached to a moving platform, unattach
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetTrigger("Jump");
         }
