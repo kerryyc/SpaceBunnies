@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public bool canMove = true; //whether player can move
 
     public GameObject bulletPrefab; //bullet that the player fires
+    public GameObject buttonFunction;
     
     //variables for jumping and checking if player is on the ground
     public float jumpForce = 700f;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
     //miscellaneous
     private GameObject bullet; //player bullet
     [HideInInspector] public bool facingRight = true; //whether player is facing right
+    private bool toggleFire;
 
     //variables for fire cooldown
     private bool canFire = true;
@@ -70,6 +72,22 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Update() {
+        //player can't move or fire if game is paused
+        if(Time.timeScale == 0) {
+            toggleFire = canFire;
+            canMove = false;
+            canFire = false;
+        }
+        else {
+            canMove = true;
+            canFire = toggleFire;
+        }
+
+        //quit game
+        if (Input.GetButtonDown("Cancel")) {
+            Application.Quit();
+        }
+
         //what happens when health is 0
         if (health <= 0) {
             //transform.parent = null;
@@ -86,7 +104,11 @@ public class PlayerController : MonoBehaviour {
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             Invoke("PlayerDead", 1f); //disable player when animation is done playing
         }
-            
+
+        //pause game
+        if(Input.GetButtonDown("Pause")) {
+            buttonFunction.GetComponent<ButtonScript>().PauseScene();
+        }
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {
@@ -182,6 +204,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void PlayerDead() {
-        gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
