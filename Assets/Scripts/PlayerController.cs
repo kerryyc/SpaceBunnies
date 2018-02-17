@@ -91,15 +91,15 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         //player can't move or fire if game is paused
-        if(Time.timeScale == 0) {
-            toggleFire = canFire;
-            canMove = false;
-            canFire = false;
-        }
-        else {
-            canMove = true;
-            canFire = toggleFire;
-        }
+        //if(Time.timeScale == 0) {
+        //    toggleFire = canFire;
+        //    canMove = false;
+        //    canFire = false;
+        //}
+        //else {
+        //    canMove = true;
+        //    canFire = toggleFire;
+        //}
 
         //quit game
         if (Input.GetButtonDown("Cancel")) {

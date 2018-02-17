@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1872,7 +1872,7 @@ Prefab:
     - target: {fileID: 114359376017881312, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReloadScene
+      value: PauseScene
       objectReference: {fileID: 0}
     - target: {fileID: 114359376017881312, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6,
         type: 2}
@@ -1882,7 +1882,7 @@ Prefab:
     - target: {fileID: 114007125291643706, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6,
         type: 2}
       propertyPath: m_Text
-      value: Reload
+      value: Pause
       objectReference: {fileID: 0}
     - target: {fileID: 1633313063689220, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6, type: 2}
       propertyPath: m_Layer
@@ -1894,7 +1894,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1633313063689220, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6, type: 2}
       propertyPath: m_Name
-      value: ReloadButton
+      value: PauseButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a4dd0cb88f6d574dbc44ba2fb2cccf6, type: 2}
@@ -2468,6 +2468,11 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114133631236225236, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b,
+        type: 2}
+      propertyPath: buttonFunction
+      value: 
+      objectReference: {fileID: 1987393407}
     m_RemovedComponents:
     - {fileID: 82261108436651876, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b, type: 2}
@@ -4926,6 +4931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNum: 2
   sceneName: 
+  canvas: {fileID: 260044296}
 --- !u!4 &1987393409
 Transform:
   m_ObjectHideFlags: 0
