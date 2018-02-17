@@ -43,8 +43,26 @@ public class PlayerController : MonoBehaviour {
     private float spriteBlinkingTotalDuration = 1.0f;
     [HideInInspector] public bool startBlinking = false;
 
+    // Audio for shoot sound
+    public AudioClip shootSound;
+
+    // Audio for explosion on death
+    public AudioClip explosionSound;
+
+    // Audio for jump
+    public AudioClip jumpSound;
+
+    private AudioSource soundSource;
+    private bool isDeathSoundPlayed = false;
+    // randomize the volume in each shot
+    private float lowRange = .5f;
+    private float highRange = 1.0f;
+
     // Use this for initialization
     void Awake () {
+
+        soundSource = GetComponent<AudioSource>();
+
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
         anim = GetComponent<Animator>();
@@ -72,9 +90,19 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         //what happens when health is 0
         if (health <= 0) {
+            if (isDeathSoundPlayed == false)
+            {
+                Debug.Log("Death");
+                soundSource.PlayOneShot(explosionSound, 1f); // play explosion
+                isDeathSoundPlayed = true;
+            }
+           
+            
             anim.SetLayerWeight(1, 0); //set animation to ground layer to play death animation
             spriteRend.enabled = true; //force enable sprite renderer if disabled by different method
             anim.Play("player_death"); //play death animation
+            
+
             //disable all colliders
             Collider2D[] colChildren = gameObject.GetComponentsInChildren<Collider2D>();
             foreach (Collider2D col in colChildren) {
@@ -83,12 +111,16 @@ public class PlayerController : MonoBehaviour {
             GetComponent<Collider2D>().enabled = false;
             //disable physics so object is not affected by gravity
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+
+            
+
             Invoke("PlayerDead", 1f); //disable player when animation is done playing
         }
             
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {
+            soundSource.PlayOneShot(jumpSound, .5f);
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetTrigger("Jump");
         }
@@ -133,6 +165,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Shoot() {
+        // play shooting sound
+        float vol = Random.Range(lowRange, highRange);
+        soundSource.PlayOneShot(shootSound, vol);
+
         //shoot bullet depending on direction faced
         if (facingRight) {
             bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x + 0.8f, transform.position.y, 0), transform.rotation);
@@ -180,6 +216,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void PlayerDead() {
+        
         gameObject.SetActive(false);
     }
 }
