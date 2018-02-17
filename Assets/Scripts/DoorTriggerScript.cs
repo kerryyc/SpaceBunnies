@@ -7,7 +7,13 @@ public class DoorTriggerScript : MonoBehaviour {
 
     // Use this for initialization
     public GameObject EndPoint;
-	void Start () {
+    public AudioClip unlockSound;
+    private AudioSource soundSource;
+    private void Awake()
+    {
+        soundSource = GetComponent<AudioSource>();
+    }
+    void Start () {
 		
 	}
 	
@@ -18,14 +24,21 @@ public class DoorTriggerScript : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player"){
+            GetComponent<SpriteRenderer>().enabled = false;
+            soundSource.PlayOneShot(unlockSound, 1f);
+
             string imagePath = "Sprites/DoorOpen";
             EndPoint.GetComponent<EndLevel1>().isDoorOpen = true;
             Debug.Log("Collision with trigger is made");
             EndPoint.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(imagePath);
-
-            // destroy once player has made contact with the trigger
-            Destroy(this.gameObject);
+            Invoke("destroyTrigger", 1.2f);
         }
        
+    }
+    private void destroyTrigger()
+    {
+        // destroy once player has made contact with the trigger
+        Destroy(this.gameObject);
+
     }
 }
