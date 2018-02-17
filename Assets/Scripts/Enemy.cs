@@ -45,8 +45,21 @@ public class Enemy : MonoBehaviour {
     private float spriteBlinkingTotalDuration = 0.4f;
     [HideInInspector] public bool startBlinking = false;
 
+    // Audio for shoot sound
+    public AudioClip shootSound;
+    public AudioClip explosionSound;
+
+    private AudioSource soundSource;
+
+    // randomize the volume in each shot
+    private float lowRange = 1f;
+    private float highRange = 1.5f;
+    private bool isDeathSoundPlayed = false;
     // Use this for initialization
     void Awake () {
+        // get audio source
+        soundSource = GetComponent<AudioSource>();
+
         rb2d = GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         thisColl = GetComponent<Collider2D>();
@@ -74,11 +87,19 @@ public class Enemy : MonoBehaviour {
 
     void Update() {
         if (health <= 0) {
+            if (isDeathSoundPlayed == false)
+            {
+                soundSource.PlayOneShot(explosionSound, 1f); // play explosion
+                isDeathSoundPlayed = true;
+
+            }
             //trigger death animation, disable physics, then destroy
             spriteRend.enabled = true;
+
             anim.Play("bunny_explosion");
             thisColl.enabled = false;
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+           
             Destroy(this.gameObject, 2);
         }
         else {
@@ -104,6 +125,8 @@ public class Enemy : MonoBehaviour {
                     AttackPlayerBullet();
                 else
                     AttackPlayerMelee();
+
+                
             }
             else {
                 //allow movement if enabled
@@ -165,7 +188,12 @@ public class Enemy : MonoBehaviour {
 
     private void AttackPlayerBullet() {
         //starts attack animation and creates a bullet
+        
         if (canAttack) {
+            // play shooting sound
+            float vol = Random.Range(lowRange, highRange);
+            soundSource.PlayOneShot(shootSound, vol);
+
             anim.Play("bunny_attack");
             canAttack = false;
             attackCoolDown = Time.time + attackRate;
@@ -189,6 +217,8 @@ public class Enemy : MonoBehaviour {
     }
 
     private void CreateBullet() {
+       
+
         //creates enemy bullet
         if (facingLeft) {
             bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x + 0.8f, transform.position.y, 0), transform.rotation);
