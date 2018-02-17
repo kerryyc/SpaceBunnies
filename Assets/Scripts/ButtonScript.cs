@@ -18,8 +18,12 @@ public class ButtonScript : MonoBehaviour {
     }
 
 	public void StartGame() {
+        // added timeScale = 1 to prevent freezing when loading level1
+        Time.timeScale = 1;
         string currLevel = "Level" + levelNum;
         SceneManager.LoadScene(currLevel, LoadSceneMode.Single);
+        Debug.Log("Restarted game from pause menu");
+        
     }
 
     public void QuitGame() {
@@ -31,6 +35,7 @@ public class ButtonScript : MonoBehaviour {
         //reloads current scene
         if (EventSystem.current.IsPointerOverGameObject()) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
         }
     }
 
