@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public bool canMove = true; //whether player can move
 
     public GameObject bulletPrefab; //bullet that the player fires
+    public GameObject buttonFunction;
     
     //variables for jumping and checking if player is on the ground
     public float jumpForce = 700f;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
     //miscellaneous
     private GameObject bullet; //player bullet
     [HideInInspector] public bool facingRight = true; //whether player is facing right
+    private bool toggleFire;
 
     //variables for fire cooldown
     private bool canFire = true;
@@ -88,16 +90,31 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Update() {
+        //player can't move or fire if game is paused
+        if(Time.timeScale == 0) {
+            toggleFire = canFire;
+            canMove = false;
+            canFire = false;
+        }
+        else {
+            canMove = true;
+            canFire = toggleFire;
+        }
+
+        //quit game
+        if (Input.GetButtonDown("Cancel")) {
+            Application.Quit();
+        }
+
         //what happens when health is 0
         if (health <= 0) {
-            if (isDeathSoundPlayed == false)
-            {
+            //transform.parent = null; //death animation attached to platform if commented
+            if (isDeathSoundPlayed == false) {
                 Debug.Log("Death");
                 soundSource.PlayOneShot(explosionSound, 1f); // play explosion
                 isDeathSoundPlayed = true;
             }
            
-            
             anim.SetLayerWeight(1, 0); //set animation to ground layer to play death animation
             spriteRend.enabled = true; //force enable sprite renderer if disabled by different method
             anim.Play("player_death"); //play death animation
@@ -116,10 +133,15 @@ public class PlayerController : MonoBehaviour {
 
             Invoke("PlayerDead", 1f); //disable player when animation is done playing
         }
-            
+
+        //pause game
+        if(Input.GetButtonDown("Pause")) {
+            buttonFunction.GetComponent<ButtonScript>().PauseScene();
+        }
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {
+            transform.parent = null; //if attached to a moving platform, unattach
             soundSource.PlayOneShot(jumpSound, .5f);
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetTrigger("Jump");
@@ -216,7 +238,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void PlayerDead() {
-        
-        gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -111,7 +111,7 @@ public class Enemy : MonoBehaviour {
             Vector3 detectDistance = transform.position - player.transform.position;
             if (Mathf.Abs(detectDistance.x) <= xDistance && Mathf.Abs(detectDistance.y) <= yDistance) {
                 //if not facing player, flip
-                if ((detectDistance.x < 0 && !facingLeft) || (detectDistance.x > 0 && facingLeft))
+                if (Mathf.Abs(detectDistance.x) > 0.4 && ((detectDistance.x < 0 && !facingLeft) || (detectDistance.x > 0 && facingLeft)))
                     Flip();
 
                 //if can't attack while moving, disable movement
@@ -155,21 +155,21 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    //void OnCollisionStay2D (Collision2D coll) {
-    //    if (coll.gameObject.tag == "Player") {
-    //        if (canDamage) {
-    //            Debug.Log("Stayed with Player");
-    //            canDamage = false;
-    //            damageCoolDown = Time.time + 0.5f;
-    //        }
-    //        if (!canDamage && Time.time > damageCoolDown) {
-    //            canDamage = true;
-    //            Debug.Log("Damaged Player");
-    //            player.GetComponent<PlayerController>().health -= 1;
-    //            player.GetComponent<PlayerController>().startBlinking = true;
-    //        }
-    //    }
-    //}
+    void OnCollisionStay2D(Collision2D coll) {
+        if (coll.gameObject.tag == "Player") {
+            if (canDamage) {
+                Debug.Log("Stayed with Player");
+                canDamage = false;
+                damageCoolDown = Time.time + 0.5f;
+            }
+            if (!canDamage && Time.time > damageCoolDown) {
+                canDamage = true;
+                //Debug.Log("Damaged Player");
+                player.GetComponent<PlayerController>().health -= 1;
+                player.GetComponent<PlayerController>().startBlinking = true;
+            }
+        }
+    }
 
     private void Flip() {
         //flip sprite depending on direction faced
@@ -179,7 +179,7 @@ public class Enemy : MonoBehaviour {
         speed *= -1;
 
         //change offset of enemy
-        if(facingLeft)
+        if (facingLeft)
             transform.position = new Vector2(transform.position.x - offset, transform.position.y);
         else
             transform.position = new Vector2(transform.position.x + offset, transform.position.y);
