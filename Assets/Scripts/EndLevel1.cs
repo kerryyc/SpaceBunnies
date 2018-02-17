@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class EndLevel1 : MonoBehaviour {
     public int levelNum;
+    public string sceneName;
     public bool isDoorOpen;
+    public bool isUseSceneName = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -26,8 +28,21 @@ public class EndLevel1 : MonoBehaviour {
             if (isDoorOpen)
             {
                 Debug.Log("Open Sesame");
-                SceneManager.LoadScene(levelName);
+                if (isUseSceneName)
+                {
+                    //loads a scene under scenename
+                    SceneManager.LoadScene(sceneName);
+                }
+                else
+                {
+                    // loads a scene under the levelName;
+                    SceneManager.LoadScene(levelName);
+
+                }
+                
             }
+
+            
 
            
         }

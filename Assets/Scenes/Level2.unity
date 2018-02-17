@@ -3478,6 +3478,16 @@ Prefab:
       propertyPath: facingLeft
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114420034962028654, guid: 450eb1b1a80bcc7428fe58258f421d57,
+        type: 2}
+      propertyPath: xDistance
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114420034962028654, guid: 450eb1b1a80bcc7428fe58258f421d57,
+        type: 2}
+      propertyPath: attackPlayerWithBullet
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 450eb1b1a80bcc7428fe58258f421d57, type: 2}
   m_IsPrefabParent: 0
@@ -5196,6 +5206,16 @@ Prefab:
     - target: {fileID: 4233316772238706, guid: 208ffee8613330b469cec7f8ea2592a1, type: 2}
       propertyPath: m_RootOrder
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109321317621652, guid: 208ffee8613330b469cec7f8ea2592a1,
+        type: 2}
+      propertyPath: sceneName
+      value: Winner
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109321317621652, guid: 208ffee8613330b469cec7f8ea2592a1,
+        type: 2}
+      propertyPath: isUseSceneName
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 208ffee8613330b469cec7f8ea2592a1, type: 2}
