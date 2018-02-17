@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     //miscellaneous
     private GameObject bullet; //player bullet
     [HideInInspector] public bool facingRight = true; //whether player is facing right
-    private bool toggleFire;
+    private bool canPause = true;
 
     //variables for fire cooldown
     private bool canFire = true;
@@ -91,15 +91,9 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         //player can't move or fire if game is paused
-        //if(Time.timeScale == 0) {
-        //    toggleFire = canFire;
-        //    canMove = false;
-        //    canFire = false;
-        //}
-        //else {
-        //    canMove = true;
-        //    canFire = toggleFire;
-        //}
+        if (Time.timeScale == 1) {
+            canPause = true;
+        }
 
         //quit game
         if (Input.GetButtonDown("Cancel")) {
@@ -135,8 +129,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         //pause game
-        if(Input.GetButtonDown("Pause")) {
+        if(canPause && Input.GetButtonDown("Pause")) {
             buttonFunction.GetComponent<ButtonScript>().PauseScene();
+            canPause = false;
         }
 
         //jump
