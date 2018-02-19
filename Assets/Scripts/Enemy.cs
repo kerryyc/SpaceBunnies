@@ -148,28 +148,28 @@ public class Enemy : MonoBehaviour {
 	}
 
     void OnCollisionEnter2D (Collision2D coll) {
-        if (coll.collider.GetType() == typeof(BoxCollider2D) && coll.gameObject.tag == "Player") {
+        if (coll.gameObject.tag == "Player") {
             //if player collides, then player takes damage
             player.GetComponent<PlayerController>().health -= 1;
             player.GetComponent<PlayerController>().startBlinking = true;
         }
     }
 
-    void OnCollisionStay2D(Collision2D coll) {
-        if (coll.gameObject.tag == "Player") {
-            if (canDamage) {
-                Debug.Log("Stayed with Player");
-                canDamage = false;
-                damageCoolDown = Time.time + 0.5f;
-            }
-            if (!canDamage && Time.time > damageCoolDown) {
-                canDamage = true;
-                //Debug.Log("Damaged Player");
-                player.GetComponent<PlayerController>().health -= 1;
-                player.GetComponent<PlayerController>().startBlinking = true;
-            }
-        }
-    }
+    //void OnCollisionStay2D(Collision2D coll) {
+    //    if (coll.gameObject.tag == "Player") {
+    //        if (canDamage) {
+    //            Debug.Log("Stayed with Player");
+    //            canDamage = false;
+    //            damageCoolDown = Time.time + 0.5f;
+    //        }
+    //        if (!canDamage && Time.time > damageCoolDown) {
+    //            canDamage = true;
+    //            //Debug.Log("Damaged Player");
+    //            player.GetComponent<PlayerController>().health -= 1;
+    //            player.GetComponent<PlayerController>().startBlinking = true;
+    //        }
+    //    }
+    //}
 
     private void Flip() {
         //flip sprite depending on direction faced
@@ -217,8 +217,6 @@ public class Enemy : MonoBehaviour {
     }
 
     private void CreateBullet() {
-       
-
         //creates enemy bullet
         if (facingLeft) {
             bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x + 0.8f, transform.position.y, 0), transform.rotation);

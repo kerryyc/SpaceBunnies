@@ -19,7 +19,7 @@ public class EndLevel1 : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.gameObject.tag == "PlayerHitbox" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Collision with door");
             string levelName = "Level" + levelNum;

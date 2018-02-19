@@ -161,6 +161,14 @@ public class PlayerController : MonoBehaviour {
             SpriteBlinkingEffect();
     }
 
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "EnemyProjectile") {
+            startBlinking = true; //start blinking effect
+            health -= 1; //decrement health
+            spriteBlinkingTotalTimer = 0f; //reset blinking timer
+        }
+    }
+
     private void Move() {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -178,7 +186,6 @@ public class PlayerController : MonoBehaviour {
 
         //set movement
         rb2d.velocity = new Vector2(moveHorizontal * speed, rb2d.velocity.y);
-
     }
 
     private void Shoot() {
