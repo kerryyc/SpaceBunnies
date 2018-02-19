@@ -17,6 +17,7 @@ public class SpikeScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Player hit spikes");
             collision.gameObject.GetComponent<PlayerController>().health = 0;
         }
     }

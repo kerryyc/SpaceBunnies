@@ -17,6 +17,7 @@ public class MovingPlatform : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+        //Debug.Log("Collision with stop trigger");
         if (other.gameObject.tag == "PlatformTrigger") {
             speed *= -1;
         }
@@ -24,5 +25,14 @@ public class MovingPlatform : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll) {
         coll.transform.parent = this.transform;
+    }
+    private void OnCollisionStay2D(Collision2D coll)
+    {
+        coll.transform.parent = this.transform;
+    }
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        // detach the player from the platform
+        coll.transform.parent = null;
     }
 }
