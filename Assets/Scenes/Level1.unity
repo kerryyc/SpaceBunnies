@@ -1627,11 +1627,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4602301123212256, guid: 897b04f80a2683945a24eadca78328c3,
     type: 2}
   m_PrefabInternal: {fileID: 1469287997}
---- !u!1 &1608857269 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1923724538165470, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1423483335}
 --- !u!1 &1653503157
 GameObject:
   m_ObjectHideFlags: 3
@@ -1769,7 +1764,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4edf5c2937566f44cb0e4609093e070d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.799
+  m_Volume: 0.695
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2035,7 +2030,6 @@ MonoBehaviour:
   levelNum: 0
   sceneName: 
   canvas: {fileID: 1073246903}
-  player: {fileID: 1608857269}
 --- !u!4 &1925747605
 Transform:
   m_ObjectHideFlags: 0
