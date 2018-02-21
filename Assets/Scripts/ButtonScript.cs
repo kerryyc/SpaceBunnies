@@ -8,7 +8,7 @@ public class ButtonScript : MonoBehaviour {
     public int levelNum = 1;
     public string sceneName;
     public GameObject canvas;
-
+    //public GameObject player;
     private bool pause = false;
 
     void Update() {
@@ -47,11 +47,15 @@ public class ButtonScript : MonoBehaviour {
     public void PauseScene() {
         Time.timeScale = 0;
         canvas.SetActive(false);
+        
+        //player.GetComponent<SpriteRenderer>().enabled = false;
         SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
     }
 
     public void UnPauseScene() {
         Time.timeScale = 1;
+        
+        //player.GetComponent<SpriteRenderer>().enabled = true;
         SceneManager.UnloadSceneAsync("PauseMenu");
     }
 }

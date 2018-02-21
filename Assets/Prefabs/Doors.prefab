@@ -138,7 +138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNum: 1
+  sceneName: 
   isDoorOpen: 0
+  isUseSceneName: 0
 --- !u!212 &212255763980257212
 SpriteRenderer:
   m_ObjectHideFlags: 1
