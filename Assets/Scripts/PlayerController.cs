@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour {
     private GameObject bullet; //player bullet
     [HideInInspector] public bool facingRight = true; //whether player is facing right
     private bool canPause = true;
+    [HideInInspector] public bool hitDoor = false;
+    public string checkpointSceneName;
 
     //variables for fire cooldown
     private bool canFire = true;
@@ -240,6 +242,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void PlayerDead() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if(!hitDoor)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        else
+            SceneManager.LoadScene(checkpointSceneName);
     }
 }

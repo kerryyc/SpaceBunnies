@@ -9,6 +9,7 @@ public class LavaScript : MonoBehaviour {
 
     public float speed = 1f;
     public float cooldown = 10f;
+    public GameObject doorTrigger;
 
     void Awake() {
         rb2d = GetComponent<Rigidbody2D>();
@@ -19,7 +20,7 @@ public class LavaScript : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (Time.time > cooldown)
+        if (!doorTrigger.gameObject.activeSelf && Time.time > cooldown)
             rb2d.velocity = new Vector2(0, speed);
     }
 
