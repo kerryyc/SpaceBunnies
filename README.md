@@ -10,7 +10,6 @@ The game should be very challenging for players, but should not be punishing. Pl
 while platforming and shooting bunnies and then feel relief when the goal is reached and the level is 
 over. The mechanics should be straightforward and not confusing to players. 
 
-Any resources used (sprites, sound effects, etc.) were found through Google and the Unity Asset Store. We 
-are not talented enough to create these high quality resources ourselves. 
+Any resources used (sprites, sound effects, etc.) were found through Google and the Unity Asset Store.
 
 Builds can be found in Assets/Builds. final.zip contains the final build.
