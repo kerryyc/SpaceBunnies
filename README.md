@@ -1,5 +1,5 @@
 # SpaceBunnies
-Game 2 for ICS 161 (Game Lab)
+Game 2 for a class at UCI
 
 Description: A scifi 2D platformer where the player plays as a robot. The goal is escape from the 
 space station by jumping from platform to platform while avoiding or killing the nefarious space bunnies.
