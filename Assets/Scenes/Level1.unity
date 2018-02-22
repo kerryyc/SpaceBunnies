@@ -1445,6 +1445,11 @@ Prefab:
       propertyPath: buttonFunction
       value: 
       objectReference: {fileID: 1925747603}
+    - target: {fileID: 114133631236225236, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b,
+        type: 2}
+      propertyPath: checkpointSceneName
+      value: Level1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b, type: 2}
   m_IsPrefabParent: 0

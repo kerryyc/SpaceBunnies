@@ -2733,6 +2733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   cooldown: 20
+  doorTrigger: {fileID: 0}
 --- !u!1 &927478921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3020,6 +3021,11 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 4.589539
+      objectReference: {fileID: 0}
+    - target: {fileID: 114133631236225236, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b,
+        type: 2}
+      propertyPath: checkpointSceneName
+      value: Level3_Checkpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9210fdfcd5ef8304c896b9aeb3e82e5b, type: 2}
