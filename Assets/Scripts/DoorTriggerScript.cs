@@ -9,27 +9,23 @@ public class DoorTriggerScript : MonoBehaviour {
     public GameObject EndPoint;
     public AudioClip unlockSound;
     private AudioSource soundSource;
+    private GameObject player;
+
     private void Awake()
     {
         soundSource = GetComponent<AudioSource>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player"){
             GetComponent<SpriteRenderer>().enabled = false;
             soundSource.PlayOneShot(unlockSound, 1f);
+            player.GetComponent<PlayerController>().hitDoor = true;
 
             string imagePath = "Sprites/DoorOpen";
             EndPoint.GetComponent<EndLevel1>().isDoorOpen = true;
-            Debug.Log("Collision with trigger is made");
             EndPoint.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(imagePath);
             Invoke("destroyTrigger", 1.2f);
         }
@@ -37,8 +33,8 @@ public class DoorTriggerScript : MonoBehaviour {
     }
     private void destroyTrigger()
     {
-        // destroy once player has made contact with the trigger
-        Destroy(this.gameObject);
+        // disable once player has made contact with the trigger
+        this.gameObject.SetActive(false);
 
     }
 }
